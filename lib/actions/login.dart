@@ -1,25 +1,74 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   //{@required this.onPressed}
 //  final GestureTapCallback onPressed;
+  @override
+  State createState() => new LoginState();
+}
+
+class LoginState extends State<Login> with TickerProviderStateMixin {
+  AnimationController controller;
+  Animation animation;
+
+  @override
+  void initState() {
+    controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   final loginController = new TextEditingController();
   void _pressed() {
     print("Pressed");
   }
 
-  void _loginValidation(String value) {
-    print("Login pressed");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.lightBlue,
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[welcome(), loginForm(), membershipPassword()],
-      ),
+      animationDuration: Duration(seconds: 10),
+      color: Colors.black,
+        child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 75.0, horizontal: 20.0),
+            child: Container(
+              color: Colors.lightBlue,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  welcome(),
+                  loginForm(),
+                  membershipPassword()
+                ],
+              ),
+            )));
+  }
+
+  Widget welcome() {
+    return Column(
+//        duration: const Duration(seconds: 3),
+      children: <Widget>[
+        Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              radius: 70.0,
+              child: Image.asset('assets/logo.png'),
+            )),
+        Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+            child: Text(
+              "Welcome to Super Grocery",
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
+              textAlign: TextAlign.center,
+            )),
+      ],
     );
   }
 
@@ -28,7 +77,7 @@ class Login extends StatelessWidget {
       children: <Widget>[
         Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
             child: TextFormField(
               controller: loginController,
               validator: (String arg) {
@@ -41,20 +90,19 @@ class Login extends StatelessWidget {
             )),
         Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
             child: TextField(
               controller: loginController,
               decoration: InputDecoration(hintText: 'Please enter password'),
             )),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+        Center(
           child: RawMaterialButton(
             onPressed: _pressed,
             fillColor: Colors.yellow,
             splashColor: Colors.green,
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
               child: Text(
                 "Login",
                 style: TextStyle(
@@ -70,38 +118,10 @@ class Login extends StatelessWidget {
     );
   }
 
-  Widget welcome() {
-    return new Column(
-      children: <Widget>[
-        Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              radius: 70.0,
-              child: Image.asset('assets/logo.png'),
-//              )
-            )),
-        Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-            child: Text(
-              "Welcome to Super Grocery",
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
-              textAlign: TextAlign.center,
-//              )
-            )),
-      ],
-    );
-  }
-
   Widget membershipPassword() {
     return new Column(
       children: <Widget>[
-        Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8.0,
-              horizontal: 20.0,
-            ),
+        Center(
             child: new FlatButton(
               splashColor: Colors.grey,
               onPressed: _pressed,
@@ -116,9 +136,7 @@ class Login extends StatelessWidget {
         InkWell(
           splashColor: Colors.white,
           onTap: _pressed,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+          child: Center(
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
