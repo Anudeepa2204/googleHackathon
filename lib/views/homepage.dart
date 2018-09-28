@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class EasingAnimationWidget extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
   EasingAnimationWidgetState createState() => EasingAnimationWidgetState();
 }
 
-class EasingAnimationWidgetState extends State<EasingAnimationWidget>
+class EasingAnimationWidgetState extends State<Home>
     with TickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;
