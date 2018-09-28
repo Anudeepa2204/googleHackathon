@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:validate/validate.dart'; // Add import for validate package.
+import 'package:validate/validate.dart';
+import 'package:deliver_grocery/sliders/right_transitions.dart';
+import 'package:deliver_grocery/views/homepage.dart';// Add import for validate package.
 
 class Login extends StatefulWidget {
   @override
@@ -50,7 +52,12 @@ class LoginState extends State<Login> with TickerProviderStateMixin {
       print('Printing the login data.');
       print('Email: ${_data.email}');
       print('Password: ${_data.password}');
+      Navigator.push(
+        context,
+        SlideRightRoute(widget: Home()),
+      );
     }
+
   }
 
   @override
