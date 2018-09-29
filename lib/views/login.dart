@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:validate/validate.dart';
-import 'package:deliver_grocery/sliders/right_transitions.dart';
+import 'package:deliver_grocery/sliders/transitions.dart';
 import 'package:deliver_grocery/views/homepage.dart';// Add import for validate package.
 
 class Login extends StatefulWidget {

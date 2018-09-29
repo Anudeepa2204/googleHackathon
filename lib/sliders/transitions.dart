@@ -12,7 +12,7 @@ class SlideRightRoute extends PageRouteBuilder {
             Widget child) {
           return new SlideTransition(
             position: new Tween<Offset>(
-              begin: const Offset(-1.0, 0.0),
+              begin: const Offset(1.8, -1.5),
               end: Offset.zero,
             ).animate(animation),
             child: child,
