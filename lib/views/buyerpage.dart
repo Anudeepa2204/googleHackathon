@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:validate/validate.dart';
-import 'package:deliver_grocery/sliders/transitions.dart';
-import 'package:deliver_grocery/views/homepage.dart';// Add import for validate package.
+import 'package:deliver_grocery/views/login.dart';
+
 
 class Buyer extends StatefulWidget {
+  var user = {};
+  Buyer({Key key, @required this.user}) : super(key: key);
+
   @override
-  MyAppState createState() => new MyAppState();
+  MyAppState createState() => new MyAppState(user: user);
 }
 
 class MyAppState extends State<Buyer> {
-
-
+  var user = {};
+  MyAppState({@required this.user}) : super();
   bool _isChecked = false;
   String displayString = "";
 
@@ -26,91 +28,114 @@ class MyAppState extends State<Buyer> {
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Receiver Items' ),
-
+        backgroundColor: Colors.lightBlue,
+        title: new Text('Dropoff Items', style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700)),
       ),
       body: new Container(
-        padding: new EdgeInsets.all(32.0),
+        padding: new EdgeInsets.all(20.0),
         child: new Center(
-          child:
-          new Column(
-            children: <Widget>[
-
-              new Row(
-                children:<Widget>[
-
-
-                  new Text(
-                    ' Name:            PETER JONES \n Address:         1000 Riverwood Dr, Mountain View \n Availability:       Wed 1 pm - 10 pm\n Distance:         0.5 mi \n' ,
-
-                    //textAlign: TextAlign.center,
-                    style: new TextStyle(fontWeight: FontWeight.bold ),
-
-        )
-
-                  //new Checkbox(value: _isChecked, onChanged:(bool value){onChanged(value);}),
-                ],
-
+          child: SingleChildScrollView(
+            child: new Column(children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 50.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text("Name:"),
+                        Text("${user['name']}")
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Address:"),
+                        Text("${user['address']}")
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Store:"),
+                        Text("${user['store']}")
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Distance:"),
+                        Text("${user['miles']}")
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Availability:"),
+                        Text("${user['time']}")
+                      ],
+                    ),
+                  ],
+                ),
               ),
 
-              new CheckboxListTile(
+              CheckboxListTile(
                   title: new Text('Rice, 5lb'),
-                  value:_isChecked,
+                  value: _isChecked,
                   activeColor: Colors.green,
-                  secondary: const Icon(Icons.home),
-                  onChanged: (bool value){onChanged(value);}),
-              new CheckboxListTile(
+                  secondary: const Icon(Icons.home, size: 20.0,),
+                  onChanged: (bool value) {
+                    onChanged(value);
+                  }),
+              CheckboxListTile(
                   title: new Text('Bread,   2 pkts'),
-                  value:_isChecked,
+                  value: _isChecked,
                   activeColor: Colors.green,
-                  secondary: const Icon(Icons.home),
-                  onChanged: (bool value){onChanged(value);}),
-              new CheckboxListTile(
+                  secondary: const Icon(Icons.home, size: 20.0,),
+                  onChanged: (bool value) {
+                    onChanged(value);
+                  }),
+              CheckboxListTile(
                   title: new Text('Sugar,   2lb'),
-                  value:_isChecked,
+                  value: _isChecked,
                   activeColor: Colors.green,
-                  secondary: const Icon(Icons.home),
-                  onChanged: (bool value){onChanged(value);}),
-              new CheckboxListTile(
+                  secondary: const Icon(Icons.home, size: 20.0,),
+                  onChanged: (bool value) {
+                    onChanged(value);
+                  }),
+              CheckboxListTile(
+
                   title: new Text('Salt,   1 lb'),
-                  value:_isChecked,
+                  value: _isChecked,
                   activeColor: Colors.green,
+                  secondary: const Icon(Icons.home, size: 20.0,),
+                  onChanged: (bool value) {
+                    onChanged(value);
+                  }),
 
-                  secondary: const Icon(Icons.home),
-                  onChanged: (bool value){onChanged(value);}),
-
-              new IconButton(
-                  icon:new Icon(Icons.add_a_photo),
-                  onPressed: null
-              ),
+              IconButton(icon: new Icon(Icons.add_a_photo), onPressed: null),
 
               //new Image.asset("assets/camera.png", width:40.0, height:40.0),
-              new Text('Click Receipt \n'),
+              Text('Upload Receipt \n'),
 
-              new RaisedButton(
-                child:new Text("Submit"),
-                color:Colors.blue,
-                onPressed:onPressed
-
+              RaisedButton(
+                  child: new Text("Submit"),
+                  color: Colors.blue,
+                  onPressed: onPressed),
+              Text(
+                displayString,
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              new Text(displayString, style: new TextStyle(fontWeight: FontWeight.bold ),),
-
-
-
-
-            ],
+            ]),
           ),
         ),
       ),
-
     );
-
   }
 }

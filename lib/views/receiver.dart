@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:deliver_grocery/sliders/transitions.dart';
+import 'package:deliver_grocery/views/homepage.dart';
+import 'package:deliver_grocery/views/login.dart';
 
 class Receiver extends StatefulWidget {
   //{@required this.onPressed}
@@ -25,7 +28,7 @@ class ReceiverList extends State<Receiver> with TickerProviderStateMixin {
   final TextEditingController nameCtrl = new TextEditingController();
   final TextEditingController qtyCtrl = new TextEditingController();
   //final myController = TextEditingController();
-
+  List items = [{}];
   @override
   void initState() {
     controller =
@@ -44,19 +47,130 @@ class ReceiverList extends State<Receiver> with TickerProviderStateMixin {
     print("Pressed");
   }
 
+  void swap_mode(BuildContext ctx) {
+    Navigator.push(ctx, SlideRightRoute(widget: Home()));
+  }
+
+  void add_to_list(String item, String quantity) {
+    items.add({item: quantity});
+    print(items.length);
+    print(items[0]);
+    print(items[1]);
+//    print(items[2]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
+          backgroundColor: Colors.lightBlue,
           title: Text(
-            'Enter Grocery Item',
+            'Purchase Items',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
+          ),
+        ),
+        drawer: new Drawer(
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue,
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/user.jpg'),
+                      ),
+                      Text(
+                        'Admin',
+                        style: TextStyle(fontSize: 25.0),
+                      ),
+                      Text(
+                        'admin@gmail.com',
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ],
+                  )),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      IconButton(
+                        splashColor: Colors.lightBlue,
+                        icon: Icon(
+                          Icons.settings,
+                          size: 30.0,
+                        ),
+                        onPressed: _pressed,
+                      ),
+                      Text(
+                        "Settings",
+                        style: TextStyle(fontSize: 30.0),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      IconButton(
+                        splashColor: Colors.lightBlue,
+                        icon: Icon(
+                          Icons.swap_horiz,
+                          size: 30.0,
+                        ),
+                        onPressed: () => swap_mode(context),
+                      ),
+                      Text(
+                        "Switch Mode",
+                        style: TextStyle(fontSize: 30.0),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      IconButton(
+                        splashColor: Colors.lightBlue,
+                        icon: Icon(
+                          Icons.history,
+                          size: 30.0,
+                        ),
+                        onPressed: _pressed,
+                      ),
+                      Text(
+                        "History",
+                        style: TextStyle(fontSize: 30.0),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      IconButton(
+                        splashColor: Colors.lightBlue,
+                        icon: Icon(
+                          Icons.exit_to_app,
+                          size: 30.0,
+                        ),
+                        onPressed: () =>  _logout(context),
+                      ),
+                      Text(
+                        "Logout",
+                        style: TextStyle(fontSize: 30.0),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
         body: new SafeArea(
           child: new Column(children: [
             new Expanded(
-                flex: 3,
+                flex: 2,
                 child: new Container(
                   child: new Padding(
                     padding: const EdgeInsets.symmetric(
@@ -118,38 +232,31 @@ class ReceiverList extends State<Receiver> with TickerProviderStateMixin {
                   ),
                 )),
             new Expanded(
-              flex: 5,
+              flex: 2,
               child: new Container(
                   child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                    new Text(
-                      "Name",
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.w700),
-                      textAlign: TextAlign.center,
-                    ),
-                    new Text(
-                      "Quantity",
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.w700),
-                      textAlign: TextAlign.center,
-                    )
-                  ])),
+                        new Text(
+                          "Name",
+                          style: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.w700),
+                          textAlign: TextAlign.center,
+                        ),
+                        new Text(
+                          "Quantity",
+                          style: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.w700),
+                          textAlign: TextAlign.center,
+                        )
+                      ])),
             ),
           ]),
         ),
         floatingActionButton: FloatingActionButton(
           // When the user presses the button, show an alert dialog with the
           // text the user has typed into our text field.
-          onPressed: () {
-            listitems.add(nameCtrl.text);
-            nameCtrl.clear();
-            setState(() {});
-            listqtys.add(qtyCtrl.text);
-            qtyCtrl.clear();
-            setState(() {});
-          },
+          onPressed: () => add_to_list(nameCtrl.text, qtyCtrl.text),
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
@@ -161,4 +268,9 @@ class ReceiverList extends State<Receiver> with TickerProviderStateMixin {
           ),
         ));
   }
+  void _logout(BuildContext context){
+    Navigator.push(context,
+        SlideLeft(widget: Login()));
+  }
+
 }

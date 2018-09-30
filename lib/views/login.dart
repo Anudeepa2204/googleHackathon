@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:validate/validate.dart';
 import 'package:deliver_grocery/sliders/transitions.dart';
-import 'package:deliver_grocery/views/homepage.dart';// Add import for validate package.
+import 'package:deliver_grocery/views/homepage.dart'; // Add import for validate package.
 
 class Login extends StatefulWidget {
   @override
@@ -24,12 +24,11 @@ class LoginState extends State<Login> with TickerProviderStateMixin {
     // If empty value, the isEmail function throw a error.
     // So I changed this function with try and catch.
     try {
-      Validate.isEmail(value);
+//      Validate.isEmail(value);
     } catch (e) {
       return 'Invalid Email';
     }
-    if(value.toString() != "admin@gmail.com")
-    {
+    if (value.toString() != "admin") {
       return 'Invalid Email';
     }
 
@@ -57,7 +56,6 @@ class LoginState extends State<Login> with TickerProviderStateMixin {
         SlideRightRoute(widget: Home()),
       );
     }
-
   }
 
   @override
@@ -78,18 +76,21 @@ class LoginState extends State<Login> with TickerProviderStateMixin {
     return Column(
       children: <Widget>[
         Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+            padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
             child: CircleAvatar(
               backgroundColor: Colors.transparent,
-              radius: 70.0,
+              radius: 50.0,
               child: Image.asset('assets/logo.png'),
             )),
+        Text(
+          "BasketDrop",
+          style: TextStyle(fontSize: 30.0),
+        ),
         Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
             child: Text(
-              "Welcome to Super Grocery",
+              "Welcome to BasketDrop",
               style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w700),
               textAlign: TextAlign.center,
             )),

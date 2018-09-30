@@ -36,5 +36,6 @@ flutter:
       - assets/images/anudeepa.jpeg
       - assets/images/rakhee.jpeg
       - assets/images/radhika.jpeg
+      - assets/user.jpg
 
   # To add assets to your application, add an assets section, like this:
